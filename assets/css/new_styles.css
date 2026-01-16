@@ -39,22 +39,49 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
     color: var(--text);
+    background-color: var(--bg-dark);
     /* background: var(--light); */
 }
 
 /* =====================
    GLOBAL FADE-IN
 ===================== */
-.fade-in {
+
+.fade-in > * {
   opacity: 0;
   transform: translateY(60px);
   transition: all 0.8s ease;
 }
 
-.fade-in.show {
+.fade-in.show > * {
   opacity: 1;
   transform: translateY(0);
 }
+
+/* This is for staggered animation */
+
+/* .fade-in.show > * {
+  animation: fadeUp 0.8s ease forwards;
+}
+
+.fade-in.show > *:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.fade-in.show > *:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} */
 
 /* =====================
    NAVIGATION
@@ -116,6 +143,24 @@ body {
 .nav_cta:hover {
   background-color: rgba(192, 132, 252, 0.12);
 }
+
+/* NAV TOGGLE (MOBILE) */
+.nav_toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav_toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--secondary);
+  margin: 5px 0;
+  transition: 0.3s;
+}
+
 
 
 
@@ -727,8 +772,10 @@ body {
   }
 
   .about_title h2 {
-    font-size: 3.5rem;
+    font-size: 3.0rem;
   }
+
+  
 
   .about_content p {
     margin-left: auto;
@@ -758,9 +805,44 @@ body {
   .nav_links {
     display: none;
   }
+
+  .nav_toggle {
+    display: block;
+  }
+
+  .nav_links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: rgba(15, 15, 20, 0.95);
+    backdrop-filter: blur(10px);
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+    display: none;
+  }
+
+  .nav_links.active {
+    display: flex;
+  }
+
 }
 
 @media (max-width: 600px) {
+  .button_container {
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+  }
+
+  .button_container .btn {
+    width: 100%;
+    text-align: center;
+    padding: 0.75rem 1.5rem; /* slimmer */
+    font-size: 0.9rem;
+    white-space: nowrap; /* prevents wrapping */
+  }
   .section_header h2 {
     font-size: 2rem;
   }
